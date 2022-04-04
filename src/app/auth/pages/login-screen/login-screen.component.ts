@@ -31,7 +31,7 @@ export class LoginScreenComponent implements OnInit {
       }else{
         Swal.fire({
           icon: 'error',
-          title: 'Error ...',
+          title: 'Error ',
           text: res,
         })
       }
