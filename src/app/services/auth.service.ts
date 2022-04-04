@@ -1,13 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private _user: any = null;
+
+  get user() {
+    return this._user;
+  }
   constructor(private httpCliennt: HttpClient) {}
+
   login(data: { email: string; password: string }) {
     // const {email,password}=data;
-    return this.httpCliennt.post('http://localhost:3000/auth/login', data);
+    return (
+      this.httpCliennt.post<any>('http://localhost:3000/auth/login', data).pipe(
+        // Procesar abtres de la respuesta,filtrar solo lo que nos interesa
+        tap((res) => {
+          if (res.ok) {
+            this._user = {
+              id: res.id,
+              username: res.username,
+              token: res.token,
+            };
+          } else {
+            this._user = null;
+          }
+        }),
+        map((res) => res.ok)
+        )
+    );
   }
 }

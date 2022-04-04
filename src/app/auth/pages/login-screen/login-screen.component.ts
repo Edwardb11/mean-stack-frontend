@@ -23,7 +23,10 @@ export class LoginScreenComponent implements OnInit {
   login() {
     console.log(this.miFormulario.value);
     this.authService.login(this.miFormulario.value).subscribe((res) => {
-      console.log(res);
+      if (res) {
+        // almacenar usuario en el localStogare
+        localStorage
+      }
     });
 
     // this.router.navigateByUrl("/task")
