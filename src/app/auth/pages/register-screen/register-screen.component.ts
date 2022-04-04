@@ -25,20 +25,30 @@ export class RegisterScreenComponent implements OnInit {
 
   ngOnInit(): void {}
   register() {
-    console.log(this.miFormulario.value);
-    // this.authService.login(this.miFormulario.value).subscribe((res) => {
-    //   if (res === true) {
-    //     // almacenar usuario en el localStogare y stringify es para parsear el json
-    //     localStorage.setItem('user', JSON.stringify(this.authService.user))
-    //     this.router.navigateByUrl("/task")
-    //   }else{
-    //     Swal.fire({
-    //       icon: 'error',
-    //       title: 'Error ',
-    //       text: res,
-    //     })
-    //   }
-    // });
+const {password,password2}=this.miFormulario.value
 
+if (password === password2) {
+  
+  this.authService.register(this.miFormulario.value).subscribe((res) => {
+    if (res === true) {
+      // almacenar usuario en el localStogare y stringify es para parsear el json
+      localStorage.setItem('user', JSON.stringify(this.authService.user))
+      this.router.navigateByUrl("/task")
+      }else{
+        Swal.fire({
+          title: 'Error ',
+          text: res,
+          icon: 'error',
+        })
+      }
+    });
+  }else{
+    Swal.fire({
+      title: 'Error ',
+      text: 'Las contraseñas no coinciden',
+      icon: 'error',
+    })
+  }
+    
   }
 }
