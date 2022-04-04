@@ -1,1 +1,41 @@
-<p>register-screen works!</p>
+<div class="row">
+  <form class="col s12">
+    <div class="row">
+
+      <div class="col s12">
+        <h2>Registrarse</h2>
+        <hr />
+      </div>
+
+      <div class="input-field col s12">
+        <input id="Username" type="text" class="validate">
+        <label for="Username">Username</label>
+        <span class="helper-text" data-error="wrong" data-success="right">Nombre</span>
+      </div>
+      <div class="input-field col s12">
+        <input id="email" type="email" class="validate">
+        <label for="email">Correo electrónico</label>
+        <span class="helper-text" data-error="wrong" data-success="right">email@example.com</span>
+      </div>
+
+      <div class="input-field col s12">
+        <input id="password" type="password" class="validate">
+        <label for="password">Contraseña</label>
+        <span class="helper-text" data-error="wrong" data-success="right">Contraseña, min 6 caracteres</span>
+      </div>
+      <div class="input-field col s12">
+        <input id="password2" type="password" class="validate">
+        <label for="password2">Confirmar Contraseña</label>
+        <span class="helper-text" data-error="wrong" data-success="right">Confirmar contraseña</span>
+      </div>
+
+      <div class="input-field col s12">
+        <a routerLink="/auth/login"> Iniciar sesión</a>
+      </div>
+      <div class="input-field col s12">
+        <button class="waves-effect waves-light btn">Registrarse </button>
+      </div>
+
+    </div>
+  </form>
+</div>
