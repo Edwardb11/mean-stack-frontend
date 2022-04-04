@@ -34,4 +34,7 @@ export class AuthService {
         catchError((err) => of(err.error.msg))
       );
   }
+  validarToken(){
+    return this._user.token;
+  }
 }
