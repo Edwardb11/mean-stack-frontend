@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, tap } from 'rxjs';
+import { catchError, map, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +15,12 @@ export class AuthService {
 
   login(data: { email: string; password: string }) {
     // const {email,password}=data;
-    return (
-      this.httpCliennt.post<any>('http://localhost:3000/auth/login', data).pipe(
+    return this.httpCliennt
+      .post<any>('http://localhost:3000/auth/login', data)
+      .pipe(
         // Procesar abtres de la respuesta,filtrar solo lo que nos interesa
         tap((res) => {
-          if (res.ok) {
+          if (res.ok === true) {
             this._user = {
               id: res.id,
               username: res.username,
@@ -29,8 +30,8 @@ export class AuthService {
             this._user = null;
           }
         }),
-        map((res) => res.ok)
-        )
-    );
+        map((res) => res.ok),
+        catchError((err) => of(err.error.msg))
+      );
   }
 }

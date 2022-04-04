@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { AuthService } from './../../../services/auth.service';
 
 @Component({
@@ -23,10 +24,16 @@ export class LoginScreenComponent implements OnInit {
   login() {
     console.log(this.miFormulario.value);
     this.authService.login(this.miFormulario.value).subscribe((res) => {
-      if (res) {
+      if (res === true) {
         // almacenar usuario en el localStogare y stringify es para parsear el json
         localStorage.setItem('user', JSON.stringify(this.authService.user))
         this.router.navigateByUrl("/task")
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Error ...',
+          text: res,
+        })
       }
     });
 
