@@ -1,17 +1,32 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanLoad } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, CanLoad, Router } from '@angular/router';
+import { Observable, tap } from 'rxjs';
 import { AuthService } from './../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanLoad {
-  constructor(private authService:AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
   canActivate(): Observable<boolean> | boolean {
-    return this.authService.validarToken();
+    return this.authService.validarToken().pipe(
+      // permitir ejecutar algo antes de validar el token
+      // En caso de que el token no sea valido, redireccionar al login
+      tap((valid) => {
+        if (!valid) {
+          this.router.navigateByUrl('/auth');
+        }
+      })
+    );
   }
   canLoad(): Observable<boolean> | boolean {
-    return this.authService.validarToken();
+    return this.authService.validarToken().pipe(
+      // permitir ejecutar algo antes de validar el token
+      tap((valid) => {
+        if (!valid) {
+          this.router.navigateByUrl('/auth');
+        }
+      })
+    );
   }
 }

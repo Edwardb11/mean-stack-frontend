@@ -35,7 +35,8 @@ export class AuthService {
       );
   }
   validarToken():Observable<boolean>{
-    if (this._user.token) {
+    const token = JSON.parse(localStorage.getItem('user')!)
+    if (token) {
       return new Observable((Subscriber)=>{
         Subscriber.next(true);
       }) 
