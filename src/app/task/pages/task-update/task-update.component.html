@@ -1,5 +1,7 @@
-<div class="container">
-  <form [formGroup]="miFormulario" (ngSubmit)="update()">
+<form [formGroup]="miFormulario" (ngSubmit)="update()">
+  <div class="row container">
+    <h2>Actualizar tareas</h2>
+    <hr />
     <div class="row">
       <div class="input-field col s6">
         <input formControlName="newTask" id="create" type="text" class="validate" required>
@@ -10,5 +12,5 @@
         <button class="btn waves-effect waves-light blue">Actualizar </button>
       </div>
     </div>
-  </form>
-</div>
+  </div>
+</form>
