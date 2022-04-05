@@ -44,7 +44,22 @@ export class CrudService {
     };
     return this.httpCliennt.post<any>(
       `${this.baseUrl}/task/create`,
-      { "nombre": value },
+      { nombre: value },
+      {
+        headers,
+      }
+    );
+  }
+
+  // Metodo para actualizar una tarea del usuario
+  update(id: string, value: string) {
+    // Obtener el token para mandarlo por el headers
+    const headers = {
+      'x-auth-token': this.user.token,
+    };
+    return this.httpCliennt.put<any>(
+      `${this.baseUrl}/task/update/${id}`,
+      { nombre: value },
       {
         headers,
       }

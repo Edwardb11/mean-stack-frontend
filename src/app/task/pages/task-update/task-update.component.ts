@@ -10,6 +10,7 @@ import { CrudService } from 'src/app/services/crud.service';
 })
 export class TaskUpdateComponent implements OnInit {
   user: any;
+  id:string="";
   miFormulario: FormGroup = this.formBuilder.group({
     newTask: [''],
   });
@@ -24,9 +25,14 @@ export class TaskUpdateComponent implements OnInit {
     this.user = this.crudService.user;
     this.activatedRoute.params.subscribe((params) => {
       this.miFormulario.setValue({ newTask: params['nombre'] });
+      this.id=params['id'];
     });
   }
   update() {
-    console.log(this.miFormulario.value.newTask);
+    // console.log(this.miFormulario.value.newTask);
+
+    this.crudService.update(this.id,this.miFormulario.value.newTask).subscribe((res) => {
+      this.router.navigateByUrl('/task');
+    })
   }
 }
