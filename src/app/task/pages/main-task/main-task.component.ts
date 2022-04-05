@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../../../services/auth.service';
+import { CrudService } from './../../../services/crud.service';
 
 @Component({
   selector: 'app-main-task',
@@ -7,15 +7,14 @@ import { AuthService } from './../../../services/auth.service';
   styleUrls: ['./main-task.component.scss']
 })
 export class MainTaskComponent implements OnInit {
+  private tasks:Array<any>=[];
 
   user:any
-  constructor(private authService:AuthService) { }
+  constructor(private crudService:CrudService) { }
 
   ngOnInit(): void {
-    // llamar al user desde el servicio
-    // this.user=this.authService.user
-    // llamar ak user desde localStogare
-    this.user=JSON.parse(localStorage.getItem('user')||'');
+    this.user=this.crudService.user;
+    this.crudService.read().subscribe((res)=>console.log(res))
   }
 
 }
