@@ -29,7 +29,7 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
+        <th>Nombre</th>
         <th>Fecha </th>
         <th>Actualizar</th>
         <th>Eliminar</th>
@@ -41,7 +41,7 @@
         <td> {{ task.nombre }}
         </td>
         <td>{{ task.createAt }}</td>
-        <td><button class="btn waves-effect waves-light amber darken-4">Actualizar</button></td>
+        <td><button (click)="update(task)" class="btn waves-effect waves-light amber darken-4">Actualizar</button></td>
         <td><button (click)="delete(task._id)" class="btn waves-effect waves-light red">Eliminar</button></td>
       </tr>
 

@@ -12,7 +12,7 @@ export class MainTaskComponent implements OnInit {
   tasks: Array<any> = [];
   user: any;
   miFormulario: FormGroup = this.formBuilder.group({
-    newTask:[' ',Validators.required],
+    newTask: [' ', Validators.required],
   });
   constructor(
     private crudService: CrudService,
@@ -25,6 +25,11 @@ export class MainTaskComponent implements OnInit {
     this.crudService.read().subscribe((res) => {
       this.tasks = res.tareas;
     });
+  }
+
+  update(task: any) {
+    const { _id } = task;
+    this.router.navigateByUrl(`/task/${_id}`);
   }
 
   create() {
