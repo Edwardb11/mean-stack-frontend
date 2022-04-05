@@ -12,8 +12,24 @@
   </div>
 </nav>
 
-<ul>
-  <li *ngFor="let task of tasks">
-    {{ task.nombre }}
-  </li>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Fecha </th>
+      <th>Actualizar</th>
+      <th>Eliminar</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td> {{ task.nombre }}
+      </td>
+      <td>{{ task.createAt }}</td>
+      <td><button class="btn waves-effect waves-light amber darken-4">Actualizar</button></td>
+      <td><button class="btn waves-effect waves-light red">Eliminar</button></td>
+    </tr>
+
+  </tbody>
+</table>

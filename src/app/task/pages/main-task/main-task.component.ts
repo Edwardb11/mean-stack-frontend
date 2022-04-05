@@ -20,6 +20,7 @@ export class MainTaskComponent implements OnInit {
     });
   }
 
+
   logout() {
     localStorage.clear();
     this.router.navigateByUrl('/auth');
