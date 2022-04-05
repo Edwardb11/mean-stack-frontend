@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-task',
@@ -9,7 +10,7 @@ import { AuthService } from './../../../services/auth.service';
 export class MainTaskComponent implements OnInit {
 
   user:any
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
     // llamar al user desde el servicio
@@ -18,4 +19,8 @@ export class MainTaskComponent implements OnInit {
     this.user=JSON.parse(localStorage.getItem('user')||'');
   }
 
+  logout(){
+    localStorage.clear()
+   this.router.navigateByUrl('/auth')
+  }
 }
