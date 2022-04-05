@@ -1,3 +1,17 @@
+<nav class="nav-extended">
+  <div class="nav-wrapper">
+    <span class="brand-logo">MEAN Task App</span>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><button (click)="logout()" class="btn waves-effect waves-light red">Cerrar sesión</button></li>
+    </ul>
+  </div>
+  <div class="nav-content right">
+    <ul class=" right tabs tabs-transparent hide-on-large-only">
+      <li><button (click)="logout()" class="btn waves-effect waves-light red">Cerrar sesión</button></li>
+    </ul>
+  </div>
+</nav>
+
 <ul>
   <li *ngFor="let task of tasks">
     {{ task.nombre }}
