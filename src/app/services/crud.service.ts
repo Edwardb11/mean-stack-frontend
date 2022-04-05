@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CrudService {
-  private baseUrl=environment.baseUrl
+  private baseUrl = environment.baseUrl;
 
   // user de localstorage
   private _user: any = JSON.parse(localStorage.getItem('user')!);
@@ -17,13 +17,11 @@ export class CrudService {
 
   constructor(private httpCliennt: HttpClient) {}
 
-
-  read(){
-
+  read() {
     // Obtener el token para mandarlo por el headers
-    const headers ={
-      "x-auth-token":this.user.token
-    }
-    return this.httpCliennt.get<any>(`${this.baseUrl}/task/read`,{headers})
+    const headers = {
+      'x-auth-token': this.user.token,
+    };
+    return this.httpCliennt.get<any>(`${this.baseUrl}/task/read`, { headers });
   }
 }
