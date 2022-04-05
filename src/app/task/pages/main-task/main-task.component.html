@@ -28,7 +28,7 @@
       </td>
       <td>{{ task.createAt }}</td>
       <td><button class="btn waves-effect waves-light amber darken-4">Actualizar</button></td>
-      <td><button class="btn waves-effect waves-light red">Eliminar</button></td>
+      <td><button  (click)="delete(task._id)" class="btn waves-effect waves-light red">Eliminar</button></td>
     </tr>
 
   </tbody>

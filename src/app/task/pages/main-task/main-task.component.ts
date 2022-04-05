@@ -19,7 +19,14 @@ export class MainTaskComponent implements OnInit {
       this.tasks = res.tareas;
     });
   }
-
+  delete(id: string) {
+    this.crudService.delete(id).subscribe(response => {
+      // para actualizar la lista de tareas se vuelve a leer
+      this.crudService.read().subscribe((res) => {
+        this.tasks = res.tareas;
+      });
+    });
+  }
 
   logout() {
     localStorage.clear();
