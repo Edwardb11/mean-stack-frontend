@@ -28,8 +28,8 @@ export class MainTaskComponent implements OnInit {
   }
 
   update(task: any) {
-    const { _id } = task;
-    this.router.navigateByUrl(`/task/${_id}`);
+    const { _id, nombre} = task;
+    this.router.navigateByUrl(`/task/${_id}/${nombre}`);
   }
 
   create() {

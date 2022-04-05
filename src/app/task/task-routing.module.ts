@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     // ruta dinamica
-    path: ':id',
+    path: ':id/:nombre',
     component: TaskUpdateComponent,
   },
   {
