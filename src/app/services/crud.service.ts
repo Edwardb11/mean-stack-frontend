@@ -44,7 +44,7 @@ export class CrudService {
     };
     return this.httpCliennt.post<any>(
       `${this.baseUrl}/task/create`,
-      { nombre: value },
+      { "nombre": value },
       {
         headers,
       }

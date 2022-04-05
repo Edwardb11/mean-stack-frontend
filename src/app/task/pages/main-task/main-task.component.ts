@@ -12,7 +12,7 @@ export class MainTaskComponent implements OnInit {
   tasks: Array<any> = [];
   user: any;
   miFormulario: FormGroup = this.formBuilder.group({
-    newTask: [''],
+    newTask:[' ',Validators.required],
   });
   constructor(
     private crudService: CrudService,
@@ -28,10 +28,11 @@ export class MainTaskComponent implements OnInit {
   }
 
   create() {
-    // console.log(this.miFormulario.value.newTask);
+    // console.log(this.miFormulario.controls['newTask'].value);
+
     this.crudService
       .create(this.miFormulario.value.newTask)
-      .subscribe(() => {
+      .subscribe((response) => {
         // Resetear el formulario
         this.miFormulario.reset();
         // para actualizar la lista de tareas se vuelve a leer
