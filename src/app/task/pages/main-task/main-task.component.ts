@@ -1,26 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../../../services/auth.service';
+import { CrudService } from './../../../services/crud.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-main-task',
   templateUrl: './main-task.component.html',
-  styleUrls: ['./main-task.component.scss']
+  styleUrls: ['./main-task.component.scss'],
 })
 export class MainTaskComponent implements OnInit {
-
-  user:any
-  constructor(private authService:AuthService,private router:Router) { }
+  tasks: Array<any> = [];
+  user: any;
+  miFormulario: FormGroup = this.formBuilder.group({
+    newTask: [' ', Validators.required],
+  });
+  constructor(
+    private crudService: CrudService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    // llamar al user desde el servicio
-    // this.user=this.authService.user
-    // llamar ak user desde localStogare
-    this.user=JSON.parse(localStorage.getItem('user')||'');
+    this.user = this.crudService.user;
+    this.crudService.read().subscribe((res) => {
+      this.tasks = res.tareas;
+    });
   }
 
-  logout(){
-    localStorage.clear()
-   this.router.navigateByUrl('/auth')
+  update(task: any) {
+    const { _id, nombre} = task;
+    this.router.navigateByUrl(`/task/${_id}/${nombre}`);
+  }
+
+  create() {
+    // console.log(this.miFormulario.controls['newTask'].value);
+
+    this.crudService
+      .create(this.miFormulario.value.newTask)
+      .subscribe((response) => {
+        // Resetear el formulario
+        this.miFormulario.reset();
+        // para actualizar la lista de tareas se vuelve a leer
+        this.crudService.read().subscribe((res) => {
+          this.tasks = res.tareas;
+        });
+      });
+  }
+
+  delete(id: string) {
+    this.crudService.delete(id).subscribe((response) => {
+      // para actualizar la lista de tareas se vuelve a leer
+      this.crudService.read().subscribe((res) => {
+        this.tasks = res.tareas;
+      });
+    });
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigateByUrl('/auth');
   }
 }

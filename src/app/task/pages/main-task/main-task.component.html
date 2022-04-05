@@ -11,3 +11,42 @@
     </ul>
   </div>
 </nav>
+
+<div class="container">
+  <form [formGroup]="miFormulario" (ngSubmit)="create()">
+    <div class="row">
+      <h3>Crear nuevas tareas</h3>
+      <hr/>
+      <div class="input-field col s9">
+        <input formControlName="newTask" id="create" type="text" class="validate" required>
+        <label class="active" for="create">Nueva tarea</label>
+      </div>
+
+      <div class="input-field col s3">
+        <button class="btn waves-effect waves-light blue">Crear </button>
+      </div>
+    </div>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Fecha </th>
+        <th>Actualizar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <td> {{ task.nombre }}
+        </td>
+        <td>{{ task.createAt }}</td>
+        <td><button (click)="update(task)" class="btn waves-effect waves-light amber darken-4">Actualizar</button></td>
+        <td><button (click)="delete(task._id)" class="btn waves-effect waves-light red">Eliminar</button></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
