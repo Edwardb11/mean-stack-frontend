@@ -35,4 +35,19 @@ export class CrudService {
       headers,
     });
   }
+
+  // Metodo para crear una tarea del usuario
+  create(value: string) {
+    // Obtener el token para mandarlo por el headers
+    const headers = {
+      'x-auth-token': this.user.token,
+    };
+    return this.httpCliennt.post<any>(
+      `${this.baseUrl}/task/create`,
+      { nombre: value },
+      {
+        headers,
+      }
+    );
+  }
 }
