@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from './../../../services/crud.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-main-task',
@@ -12,7 +12,7 @@ export class MainTaskComponent implements OnInit {
   tasks: Array<any> = [];
   user: any;
   miFormulario: FormGroup = this.formBuilder.group({
-    newTask: [' ', Validators.required],
+    newTask: [],
   });
   constructor(
     private crudService: CrudService,
@@ -28,13 +28,18 @@ export class MainTaskComponent implements OnInit {
   }
 
   update(task: any) {
-    const { _id, nombre} = task;
+    const { _id, nombre } = task;
     this.router.navigateByUrl(`/task/${_id}/${nombre}`);
   }
 
   create() {
     // console.log(this.miFormulario.controls['newTask'].value);
-
+    if (
+      !this.miFormulario.valid ||
+      this.miFormulario.controls['newTask'].value === ''
+    ) {
+      return;
+    }
     this.crudService
       .create(this.miFormulario.value.newTask)
       .subscribe((response) => {
@@ -55,5 +60,4 @@ export class MainTaskComponent implements OnInit {
       });
     });
   }
-
 }
