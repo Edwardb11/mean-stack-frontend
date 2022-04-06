@@ -12,10 +12,10 @@ import Swal from 'sweetalert2';
 export class RegisterScreenComponent implements OnInit {
 
   miFormulario: FormGroup = this.fb.group({
-    username: ['text 8', [Validators.required, Validators.minLength(3)]],
-    email: ['test1@mail.com', [Validators.required, Validators.email]],
-    password: ['123456', [Validators.required, Validators.minLength(6)]],
-    password2: ['123456', [Validators.required, Validators.minLength(6)]],
+    username: ['', [Validators.required, Validators.minLength(3)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    password2: ['', [Validators.required, Validators.minLength(6)]],
   });
   constructor(
     private fb: FormBuilder,

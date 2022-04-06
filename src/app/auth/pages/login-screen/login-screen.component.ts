@@ -11,8 +11,8 @@ import { AuthService } from './../../../services/auth.service';
 })
 export class LoginScreenComponent implements OnInit {
   miFormulario: FormGroup = this.fb.group({
-    email: ['test1@mail.com', [Validators.required, Validators.email]],
-    password: ['123456', [Validators.required, Validators.minLength(6)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
   });
   constructor(
     private fb: FormBuilder,
