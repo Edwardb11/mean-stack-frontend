@@ -22,7 +22,7 @@ export class LoginScreenComponent implements OnInit {
 
   ngOnInit(): void {}
   login() {
-    console.log(this.miFormulario.value);
+    // console.log(this.miFormulario.value);
     this.authService.login(this.miFormulario.value).subscribe((res) => {
       if (res === true) {
         // almacenar usuario en el localStogare y stringify es para parsear el json
